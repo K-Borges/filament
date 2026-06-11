@@ -31,7 +31,8 @@ class ProductsTable
                 TextColumn::make('stock')
                     ->label('Estoque')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('price')
                     ->label('Preço')
                     ->money('BRL')

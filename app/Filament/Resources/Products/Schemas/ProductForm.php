@@ -37,7 +37,7 @@ class ProductForm
                 TextInput::make('stock')
                     ->label('Quantidade em Estoque')
                     ->numeric()
-                    ->default(0),
+                    ,
                     
                 FileUpload::make('image_url')
                 ->label('Foto do Produto')

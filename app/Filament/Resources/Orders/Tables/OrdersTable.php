@@ -3,11 +3,10 @@
 namespace App\Filament\Resources\Orders\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Actions\DeleteAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -20,10 +19,23 @@ class OrdersTable
 
                 TextColumn::make('user.name')
                     ->label('Cliente')
-                    ->sortable()
-                    ,
-                    TextColumn::make('status')
-                        ->searchable(),
+                    ->sortable(),
+
+                TextColumn::make('status')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'pending' => 'Pendente',
+                        'paid' => 'Pago',
+                        'cancelled' => 'Cancelado',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'paid' => 'success',
+                        'cancelled' => 'danger',
+                        default => 'gray',
+                    }),
+
                 TextColumn::make('total_price')
                     ->label('Preço total do pedido')
                     ->money('BRL')
@@ -44,7 +56,7 @@ class OrdersTable
             ->filters([
                 //
             ])
-                
+
             ->recordUrl(null)
 
             ->recordAction(ViewAction::class)
@@ -52,21 +64,21 @@ class OrdersTable
             ->actions([
 
                 ViewAction::make()
-                ->modal()
-                ->extraAttributes(['class' => 'hidden']),
+                    ->modal()
+                    ->extraAttributes(['class' => 'hidden']),
 
                 DeleteAction::make()
-                ->label('Excluir')
-                ->requiresConfirmation()
-                ->color('danger'),
-                
+                    ->label('Excluir')
+                    ->requiresConfirmation()
+                    ->color('danger'),
+
                 EditAction::make()
-                ->label('Editar')
-                ->color('primary')
-                ->icon('heroicon-o-pencil-square')
-                ->tooltip('Editar este produto')
-                ->modal()
-                ->modalWidth('5xl'),
+                    ->label('Editar')
+                    ->color('primary')
+                    ->icon('heroicon-o-pencil-square')
+                    ->tooltip('Editar este produto')
+                    ->modal()
+                    ->modalWidth('5xl'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

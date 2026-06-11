@@ -18,7 +18,20 @@ class OrderInfolist
                     ->label('Preço total do pedido')
                     ->money('BRL'),
 
-                TextEntry::make('status'),
+                TextEntry::make('status')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'pending' => 'Pendente',
+                        'paid' => 'Pago',
+                        'cancelled' => 'Cancelado',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'paid' => 'success',
+                        'cancelled' => 'danger',
+                        default => 'gray',
+                    }),
 
                 TextEntry::make('created_at')
                     ->label('Criado em:')
