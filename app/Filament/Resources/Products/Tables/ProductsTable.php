@@ -6,10 +6,11 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Schemas\Schema;
+use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+
 
 class ProductsTable
 {
@@ -18,25 +19,31 @@ class ProductsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nome')
                     ->searchable(),
-                TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                TextColumn::make('stock')
-                    ->numeric()
-                    ->sortable(),
-                ImageColumn::make('image_url')
-                    ->label('Foto')
-                    ->disk('public'),
                 TextColumn::make('category.name')
                     ->label('Categoria')
                     ->sortable()
                     ->searchable(),
+                ImageColumn::make('image_url')
+                    ->label('Foto')
+                    ->disk('public'),
+                TextColumn::make('stock')
+                    ->label('Estoque')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('price')
+                    ->label('Preço')
+                    ->money('BRL')
+                    ->sortable(),
+
                 TextColumn::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -44,13 +51,29 @@ class ProductsTable
             ->filters([
                 //
             ])
-            ->recordActions([
+
+            ->recordUrl(null)
+
+            ->recordAction(ViewAction::class)
+
+            ->actions([
+
                 ViewAction::make()
-                    ->schema(fn (Schema $schema) => $schema->components([
-                        \Filament\Schemas\Components\EmbeddedSchema::make('infolist'),
-                    ]))
-                    ->modalWidth('xl'),
-                EditAction::make(),
+                ->modal()
+                ->extraAttributes(['class' => 'hidden']),
+
+                DeleteAction::make()
+                ->label('Excluir')
+                ->requiresConfirmation()
+                ->color('danger'),
+                
+                EditAction::make()
+                ->label('Editar')
+                ->color('primary')
+                ->icon('heroicon-o-pencil-square')
+                ->tooltip('Editar este produto')
+                ->modal()
+                ->modalWidth('5xl'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

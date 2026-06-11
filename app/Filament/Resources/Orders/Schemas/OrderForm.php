@@ -17,6 +17,7 @@ class OrderForm
                 TextInput::make('total_price')
                     ->required()
                     ->numeric()
+                    
                     ->prefix('$'),
                 TextInput::make('status')
                     ->required()

@@ -11,15 +11,22 @@ class OrderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('user_id')
-                    ->numeric(),
+                TextEntry::make('user.name')
+                    ->label('Nome do cliente'),
+                
                 TextEntry::make('total_price')
-                    ->money(),
+                    ->label('Preço total do pedido')
+                    ->money('BRL'),
+
                 TextEntry::make('status'),
+
                 TextEntry::make('created_at')
+                    ->label('Criado em:')
                     ->dateTime()
                     ->placeholder('-'),
+                    
                 TextEntry::make('updated_at')
+                    ->label('Editado em:')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

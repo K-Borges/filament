@@ -1,58 +1,314 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestão de Produtos e Pedidos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema administrativo desenvolvido com Laravel 13 e Filament 4 para gerenciamento de produtos, categorias, pedidos e métricas de negócio.
 
-## About Laravel
+## Tecnologias Utilizadas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Backend
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* PHP 8.4+
+* Laravel 13
+* SQLite (desenvolvimento)
+* Eloquent ORM
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Painel Administrativo
 
-## Learning Laravel
+* Filament 4
+* Livewire 3
+* Alpine.js
+* Tailwind CSS 4
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Ferramentas de Desenvolvimento
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Composer
+* Artisan CLI
+* Faker
+* Seeders e Factories
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+# Objetivo do Projeto
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Este projeto foi criado com fins de estudo e prática dos recursos modernos do ecossistema Laravel, explorando principalmente:
+
+* CRUDs avançados com Filament
+* Relacionamentos Eloquent
+* Widgets e Dashboards
+* Infolists
+* Uploads de arquivos
+* Tabelas e filtros
+* Seeders e Factories
+* Arquitetura TALL Stack
+
+---
+
+# Funcionalidades
+
+## Dashboard
+
+Painel inicial com indicadores de negócio:
+
+* Total de clientes cadastrados
+* Quantidade de itens em estoque
+* Total de pedidos
+* Faturamento acumulado
+
+Widgets desenvolvidos com:
+
+* StatsOverviewWidget
+* ChartWidget
+
+---
+
+## Gestão de Categorias
+
+Permite:
+
+* Criar categorias
+* Editar categorias
+* Visualizar categorias
+* Excluir categorias
+
+---
+
+## Gestão de Produtos
+
+Permite:
+
+* Cadastro de produtos
+* Controle de estoque
+* Associação com categorias
+* Upload de imagens
+* Pesquisa e ordenação
+* Visualização detalhada
+
+Campos principais:
+
+* Nome
+* Descrição
+* Preço
+* Estoque
+* Categoria
+* Imagem
+
+---
+
+## Gestão de Pedidos
+
+Permite:
+
+* Criar pedidos
+* Associar clientes
+* Gerenciar status
+* Visualizar pedidos
+* Calcular faturamento
+
+Campos principais:
+
+* Cliente
+* Valor total
+* Status
+
+---
+
+## Itens do Pedido
+
+Relacionamento responsável por armazenar:
+
+* Produto
+* Quantidade
+* Valor unitário
+* Subtotal
+
+Relacionamentos:
+
+* Pedido possui vários itens
+* Item pertence a um pedido
+* Item pertence a um produto
+
+---
+
+# Estrutura do Banco de Dados
+
+## users
+
+Responsável pelos usuários do sistema.
+
+### Campos
+
+* id
+* name
+* email
+* password
+
+---
+
+## categories
+
+Categorias dos produtos.
+
+### Campos
+
+* id
+* name
+
+---
+
+## products
+
+Produtos cadastrados.
+
+### Campos
+
+* id
+* category_id
+* name
+* description
+* price
+* stock
+* image
+
+---
+
+## orders
+
+Pedidos realizados.
+
+### Campos
+
+* id
+* user_id
+* total_price
+* status
+
+---
+
+## order_items
+
+Itens vinculados aos pedidos.
+
+### Campos
+
+* id
+* order_id
+* product_id
+* quantity
+* unit_price
+* subtotal
+
+---
+
+# Relacionamentos
+
+User
+
+* hasMany Orders
+
+Order
+
+* belongsTo User
+* hasMany OrderItems
+
+OrderItem
+
+* belongsTo Order
+* belongsTo Product
+
+Product
+
+* belongsTo Category
+* hasMany OrderItems
+
+Category
+
+* hasMany Products
+
+---
+
+# Instalação
+
+Clone o projeto:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repositorio>
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Acesse a pasta:
 
-## Contributing
+```bash
+cd projeto
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Instale as dependências:
 
-## Code of Conduct
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copie o arquivo de ambiente:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Gere a chave:
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Execute as migrations:
+
+```bash
+php artisan migrate
+```
+
+Popule o banco:
+
+```bash
+php artisan db:seed
+```
+
+Inicie o servidor:
+
+```bash
+php artisan serve
+```
+
+---
+
+# Conceitos Estudados
+
+Durante o desenvolvimento deste projeto foram praticados:
+
+* Resources
+* Forms
+* Tables
+* Infolists
+* Widgets
+* Dashboards
+* Eloquent Relationships
+* Factories
+* Seeders
+* Migrations
+* Notifications
+* File Upload
+* Filtros
+* Paginação
+* Pesquisa
+* TALL Stack
+
+---
+
+# Próximas Melhorias
+
+* Relation Managers
+* Dashboard avançado
+* Gráficos de vendas
+* Controle de permissões
+* Policies
+* Soft Deletes
+* API REST
+* Integrações externas
+* Testes automatizados
+

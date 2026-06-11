@@ -24,7 +24,7 @@ class ProductInfolist
 
                 TextEntry::make('price')
                 ->label('Preço:')
-                    ->money(),
+                    ->money('BRL'),
 
                 TextEntry::make('stock')
                     ->label('Quantidade em Estoque:')
@@ -40,9 +40,8 @@ class ProductInfolist
                     ->placeholder('-'),
 
                 TextEntry::make('created_at')
-                    
-                    ->dateTime()
                     ->label('Criado em:')
+                    ->dateTime()
                     ->placeholder('-'),
                 
 

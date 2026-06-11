@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Order;
 
-class OndeEstaoAsMetricas extends StatsOverviewWidget
+class Metricas extends StatsOverviewWidget
 {
     protected function getStats(): array
     {
@@ -18,7 +18,7 @@ class OndeEstaoAsMetricas extends StatsOverviewWidget
             
             ->color('info'),
             
-            Stat::make('Produtos em estoque', Product::count())
+            Stat::make('Produtos em estoque', number_format(Product::sum('stock'), 0, '', '.'))
             ->description('Número total de produtos disponíveis no catálogo.')
             
             ->color('warning'),

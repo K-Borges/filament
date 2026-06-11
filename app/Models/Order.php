@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @mixin IdeHelperOrder
+ */
 class Order extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
     'user_id', 
     'total_price',
@@ -16,7 +22,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function itens()
+    public function items()
     {   
         return $this->hasMany(OrderItem::class);
     }
