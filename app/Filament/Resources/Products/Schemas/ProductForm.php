@@ -15,8 +15,7 @@ class ProductForm
     {
         return $schema
             ->components([
-                
-                
+                               
                 TextInput::make('name')
                     ->label('Nome do Produto')
                     ->required(),
@@ -32,7 +31,8 @@ class ProductForm
                 TextInput::make('price')
                     ->label('Preço')
                     ->numeric()
-                    ->prefix('R$'),
+                    ->prefix('R$')
+                    ->required(),
 
                 TextInput::make('stock')
                     ->label('Quantidade em Estoque')
