@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Categories\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -33,10 +35,29 @@ class CategoriesTable
             ->filters([
                 //
             ])
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+            ->actions([
+                ActionGroup::make([
+                    ViewAction::make()
+
+                        ->modal()
+                        ->extraAttributes(['class' => 'hidden']),
+
+                    EditAction::make()
+                        ->label('Editar')
+                        ->color('primary')
+                        ->icon('heroicon-o-pencil-square')
+                        ->tooltip('Editar Categoria')
+                        ->modal()
+                        ->modalWidth('5xl'),
+                    DeleteAction::make()
+                        ->label('Excluir')
+                        ->tooltip('Excluir Categoria')
+                        ->requiresConfirmation()
+                        ->color('danger'),
+                ])
+                    ->icon('heroicon-m-ellipsis-horizontal')
             ])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

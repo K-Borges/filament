@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Products\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -58,24 +59,28 @@ class ProductsTable
             ->recordAction(ViewAction::class)
 
             ->actions([
+                ActionGroup::make([
+                    ViewAction::make()
 
-                ViewAction::make()
-                ->modal()
-                ->extraAttributes(['class' => 'hidden']),
+                    ->modal()
+                    ->extraAttributes(['class' => 'hidden']),
 
-                DeleteAction::make()
-                ->label('Excluir')
-                ->requiresConfirmation()
-                ->color('danger'),
-                
-                EditAction::make()
-                ->label('Editar')
-                ->color('primary')
-                ->icon('heroicon-o-pencil-square')
-                ->tooltip('Editar este produto')
-                ->modal()
-                ->modalWidth('5xl'),
+                    EditAction::make()
+                        ->label('Editar')
+                        ->color('primary')
+                        ->icon('heroicon-o-pencil-square')
+                        ->tooltip('Editar produto')
+                        ->modal()
+                        ->modalWidth('5xl'),
+                    DeleteAction::make()
+                        ->label('Excluir')
+                        ->tooltip('Excluir produto')
+                        ->requiresConfirmation()
+                        ->color('danger'),
+                ])
+                        ->icon('heroicon-m-ellipsis-horizontal')
             ])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

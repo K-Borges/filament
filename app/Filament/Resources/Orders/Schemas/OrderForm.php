@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\Orders\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+
 
 class OrderForm
 {
@@ -13,11 +15,12 @@ class OrderForm
     {
         return $schema
             ->components([
-                TextInput::make('user.name')
+                TextInput::make('user_id')
+
                     ->label('Nome do usuario')
                     ->required(),
 
-                TextInput::make('name')
+                TextInput::make('product_id')
                     ->label('Nome do Produto')
                     ->required(),
 
