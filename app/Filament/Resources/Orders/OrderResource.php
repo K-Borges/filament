@@ -24,7 +24,9 @@ class OrderResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Pedidos';
 
-    protected static ?int $navigationSort = 1;
+    protected static string|null|\UnitEnum $navigationGroup = 'Vendas';
+
+    protected static ?int $navigationSort = 30;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 

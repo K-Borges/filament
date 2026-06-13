@@ -24,8 +24,9 @@ class ProductResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Produtos';
 
+    protected static string|null|\UnitEnum $navigationGroup = 'Catálogo';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 20;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 
@@ -53,7 +54,7 @@ class ProductResource extends Resource
         ];
     }
 
-    
+
     public static function getPages(): array
     {
         return [
