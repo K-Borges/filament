@@ -64,4 +64,11 @@ class ProductResource extends Resource
             'edit' => EditProduct::route('/{record}/edit'),
         ];
     }
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'name',
+            'description',
+        ];
+    }
 }

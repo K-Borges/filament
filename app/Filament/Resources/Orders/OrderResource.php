@@ -63,4 +63,11 @@ class OrderResource extends Resource
             'edit' => EditOrder::route('/{record}/edit'),
         ];
     }
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'id',
+            'status',
+        ];
+    }
 }

@@ -8,6 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -17,6 +18,10 @@ class UsersTable
     {
         return $table
             ->columns([
+                ImageColumn::make('image_url')
+                    ->label('Foto')
+
+                    ->disk('public'),
                 TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),

@@ -3,32 +3,70 @@
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 
+/* Login */
+
+.fi-simple-main {
+    border-radius: 24px;
+}
+
+.fi-simple-layout {
+    background: linear-gradient(
+        135deg,
+        #e1e3e6,
+        #ffffff
+    );
+}
+
+/* Sidebar */
 
 .fi-sidebar {
     background-color: #ffffff;
 }
 
-
 .fi-sidebar-item-button {
     color: #cbd5e1;
 }
-
 
 .fi-sidebar-item-button:hover {
     background-color: #4b80d5;
 }
 
+/* Main */
 
 .fi-main {
     background-color: #f8fafc;
 }
 
-
 .fi-wi-stats-overview-stat {
     border-radius: 16px;
 }
 
-
 .fi-section {
     border-radius: 16px;
+}
+
+/* Dark Mode */
+
+.dark .fi-simple-layout {
+    background: linear-gradient(
+        135deg,
+        #131823,
+        #060d15
+    );
+}
+
+.dark .fi-sidebar {
+    background-color: #000000;
+}
+
+.dark .fi-sidebar-item-button {
+    color: #e5e7eb;
+}
+
+.dark .fi-sidebar-item-button:hover {
+    background-color: #000000;
+}
+
+.dark .fi-main {
+    background-color: #000000;
 }
