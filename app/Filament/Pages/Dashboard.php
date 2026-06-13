@@ -23,7 +23,7 @@ class Dashboard extends Page
           Metricas::class,
           ProdutosEstoqueBaixo::class,
           UltimosPedidos::class,
-          PedidosPorMes::class,
+
       ];}
     public function getHeaderWidgetsColumns(): int|array
     {
