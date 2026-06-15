@@ -1,20 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Launcher de desenvolvimento multiplataforma
-|--------------------------------------------------------------------------
-|
-| Sobe os processos de desenvolvimento (server, queue, logs, vite) via
-| `npx concurrently`. O `php artisan pail` (logs) exige a extensão `pcntl`,
-| que só existe em Unix/Linux — no Windows ela não está disponível e o pail
-| derruba todos os outros processos por causa do --kill-others.
-|
-| Por isso o pail só é incluído quando `pcntl` está presente. Assim o mesmo
-| `composer dev` funciona tanto no Linux quanto no Windows.
-|
-*/
-
 $hasPail = function_exists('pcntl_fork');
 
 $commands = [
@@ -27,6 +12,12 @@ if ($hasPail) {
 } else {
     fwrite(STDERR, "[dev] Extensão pcntl ausente (Windows): pulando 'php artisan pail'.\n");
 }
+
+$nvmNode = glob($_SERVER['HOME'] . '/.nvm/versions/node/v2*/bin') ?: [];
+rsort($nvmNode);
+$nodeBin = $nvmNode ? $nvmNode[0] : null;
+$pathEnv = $nodeBin ? $nodeBin . ':' . getenv('PATH') : getenv('PATH');
+putenv('PATH=' . $pathEnv);
 
 $commands[] = ['name' => 'vite', 'color' => '#fdba74', 'cmd' => 'npm run dev'];
 

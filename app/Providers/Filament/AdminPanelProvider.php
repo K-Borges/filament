@@ -7,6 +7,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Enums\UserMenuPosition;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -32,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->favicon(asset('images/logo2.svg'))
             ->sidebarFullyCollapsibleOnDesktop()
+            ->userMenu(position: UserMenuPosition::Sidebar)
             ->colors([
                 'primary' => Color::Sky,
             ])
