@@ -3,9 +3,9 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Order;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
-use Filament\Tables\Columns\TextColumn;
 
 class UltimosPedidos extends TableWidget
 {
@@ -25,7 +25,19 @@ class UltimosPedidos extends TableWidget
                     ->label('Cliente'),
 
                 TextColumn::make('status')
-                    ->badge(),
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'pending' => 'Pendente',
+                        'paid' => 'Pago',
+                        'cancelled' => 'Cancelado',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'paid' => 'success',
+                        'cancelled' => 'danger',
+                        default => 'gray',
+                    }),
 
                 TextColumn::make('created_at')
                     ->date('d/m/Y'),

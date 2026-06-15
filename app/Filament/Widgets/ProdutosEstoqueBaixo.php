@@ -3,9 +3,9 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Product;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
-use Filament\Tables\Columns\TextColumn;
 
 class ProdutosEstoqueBaixo extends TableWidget
 {
@@ -30,7 +30,7 @@ class ProdutosEstoqueBaixo extends TableWidget
                         $state == 0 => 'danger',
                         $state <= 3 => 'warning',
                         default => 'success',
-                    })
+                    }),
 
             ]);
     }

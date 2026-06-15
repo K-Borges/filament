@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-# Garante estrutura e permissões do storage (necessário quando o volume é montado)
+# storage
 mkdir -p /var/www/html/storage/logs \
          /var/www/html/storage/framework/cache \
          /var/www/html/storage/framework/sessions \
@@ -11,7 +11,7 @@ mkdir -p /var/www/html/storage/logs \
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Garante que o banco SQLite existe e o diretório é gravável (SQLite precisa do diretório)
+# SQLite
 touch /var/www/html/database/database.sqlite
 chown -R www-data:www-data /var/www/html/database
 chmod -R 775 /var/www/html/database
