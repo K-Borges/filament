@@ -38,7 +38,7 @@ class OrdersTable
                     }),
 
                 TextColumn::make('total_price')
-                    ->label('Preço total do pedido')
+                    ->label('Preço total  ')
                     ->money('BRL')
                     ->sortable(),
 
