@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\Metricas;
-use App\Filament\Widgets\PedidosPorMes;
 use App\Filament\Widgets\ProdutosEstoqueBaixo;
 use App\Filament\Widgets\UltimosPedidos;
 use Filament\Pages\Page;
